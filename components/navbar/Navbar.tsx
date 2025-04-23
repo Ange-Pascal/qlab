@@ -3,8 +3,30 @@ import DarkMode from "./DarkMode";
 import { NavigationMenuDemo } from "./LinksDropdown";
 // import LinksDropdown from "./LinksDropdown";
 import Logo from "./Logo";
-import NavSearch from "./NavSearch";
-import { SmMenu } from "./SmMenu";
+// import NavSearch from "./NavSearch";
+import SearchCourseModal from "./SearchModal";
+import { SmMenu } from "./SmMenu"; 
+
+const courses = [
+  {
+    id: 1,
+    title: 'Développement Web avec Next.js',
+    description: 'Maîtrisez SSR, API routes et plus avec Next.js 13+',
+    imageUrl: '/images/next.jpg',
+  },
+  {
+    id: 2,
+    title: 'Design UI/UX moderne',
+    description: 'Apprenez à créer des interfaces élégantes avec Figma',
+    imageUrl: '/images/uiux.jpg',
+  },
+  {
+    id: 3,
+    title: 'Laravel & APIs REST',
+    description: 'Construisez des backends solides avec Laravel 10',
+    imageUrl: '/images/laravel.jpg',
+  },
+];
 
 function Navbar() {
   return (
@@ -13,9 +35,10 @@ function Navbar() {
         <Logo />
         <span className="hidden xl:block md:block "><NavigationMenuDemo /></span>
         <div className="flex gap-4 items-center">
-          <NavSearch />
+          {/* <NavSearch /> */}
+          <span className=""><SmMenu/></span>
           <DarkMode />
-          <span className="xl:hidden md:hidden"><SmMenu/></span>
+          <span><SearchCourseModal courses={courses}/></span>
         </div>
       </Container>
     </nav>
