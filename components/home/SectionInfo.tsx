@@ -1,7 +1,7 @@
 import React from "react";
 import icons from "@/utils/infoIcon";
-import reactImg from "@/images/react.jpg";
-import Image from "next/image";
+// import reactImg from "@/images/react.jpg";
+// import Image from "next/image";
 
 function SectionInfo() {
   return (
@@ -26,14 +26,7 @@ function SectionInfo() {
           );
         })}
       </div>
-      <div>
-        <Image
-          src={reactImg} 
-          priority
-          alt="Illustration de la section"
-          className="border-b rounded-xl object-cover hover:border shadow-2xl"
-        />
-      </div>
+      
     </section>
   );
 }
