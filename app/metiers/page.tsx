@@ -132,6 +132,30 @@ const metiersData = [
       image: '/images/learning.jpg',
       formations: ['Stratégie réseaux sociaux', 'Outils de gestion (Hootsuite, Buffer)', 'Création de contenu']
     },
+    {
+      title: 'Développeur Front-End',
+      description: 'Crée l’interface utilisateur des sites et applications web.',
+      image: '/images/frontend.jpg',
+      formations: ['HTML/CSS', 'JavaScript', 'Frameworks (React, Vue, Angular)']
+    },
+    {
+      title: 'Développeur Back-End',
+      description: 'Gère la logique serveur, les bases de données et les API.',
+      image: '/images/backend.jpg',
+      formations: ['PHP/Laravel', 'Node.js', 'Bases de données (MySQL, MongoDB)']
+    },
+    {
+      title: 'Développeur Full-Stack',
+      description: 'Maîtrise le développement à la fois côté client et serveur.',
+      image: '/images/learning.jpg',
+      formations: ['HTML/CSS/JS', 'Node.js / PHP', 'Bases de données', 'Frameworks Full-Stack']
+    },
+    {
+      title: 'Développeur CMS',
+      description: 'Crée et personnalise des sites à l’aide de CMS comme WordPress.',
+      image: '/images/learning.jpg',
+      formations: ['WordPress', 'Thèmes & plugins', 'SEO et optimisation']
+    }
     // ... autres métiers
   ];
   

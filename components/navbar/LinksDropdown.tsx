@@ -18,64 +18,186 @@ import {
 
 const components: { title: string; href: string; description: string }[] = [
   {
-    title: "Développeur FullStack",
-    href: "/docs/primitives/alert-dialog",
-    description:
-      "Un développeur fullstack crée des applications web en travaillant à la fois sur le front-end et le back-end.",
+    title: "React.js",
+    href: "/docs/reactjs",
+    description: "Bibliothèque JavaScript pour créer des interfaces utilisateur dynamiques et modulaires."
   },
   {
-    title: "Développeur Web",
-    href: "/docs/primitives/hover-card",
-    description:
-      "Un développeur web crée et maintient des sites internet en utilisant diverses technologies pour assurer leur fonctionnalité, leur design et leur performance.",
+    title: "Next.js",
+    href: "/docs/nextjs",
+    description: "Framework React pour créer des applications web performantes avec rendu côté serveur (SSR)."
   },
   {
-    title: "Développeur Mobile",
-    href: "/docs/primitives/progress",
-    description:
-      "Un développeur mobile conçoit et développe des applications mobiles adaptées aux plateformes iOS et Android, en optimisant leur performance et leur expérience utilisateur.",
+    title: "Tailwind CSS",
+    href: "/docs/tailwindcss",
+    description: "Framework CSS utilitaire pour construire rapidement des interfaces modernes et responsives."
   },
   {
-    title: "Marketing Digital",
-    href: "/docs/primitives/scroll-area",
-    description: "Le marketing digital utilise les canaux en ligne tels que les réseaux sociaux, les moteurs de recherche et les sites web pour promouvoir des produits, services ou marques auprès d'un large public",
+    title: "HTML",
+    href: "/docs/html",
+    description: "Langage de balisage standard pour structurer le contenu d’une page web."
   },
   {
-    title: "DevOps",
-    href: "/docs/primitives/tabs",
-    description:
-      "Le DevOps est une méthodologie qui combine les pratiques de développement et d'exploitation pour améliorer la collaboration, l'automatisation et l'efficacité dans la gestion des infrastructures et des déploiements.",
+    title: "CSS",
+    href: "/docs/css",
+    description: "Langage de style pour mettre en forme les pages web : couleurs, mise en page, animations..."
   },
   {
-    title: "Data Engineer",
-    href: "/docs/primitives/tooltip",
-    description:
-      "Un data engineer conçoit, construit et maintient des systèmes et des infrastructures pour collecter, stocker et traiter de grandes quantités de données afin de les rendre accessibles et exploitables.",
+    title: "JavaScript",
+    href: "/docs/javascript",
+    description: "Langage de programmation essentiel pour rendre les pages web interactives."
   },
   {
-    title: "Sécurité Informatique",
-    href: "/docs/primitives/tooltip",
-    description:
-      "La sécurité informatique consiste à protéger les systèmes, réseaux et données contre les attaques, les intrusions et les pertes afin d'assurer leur intégrité, confidentialité et disponibilité.",
+    title: "Laravel",
+    href: "/docs/laravel",
+    description: "Framework PHP robuste pour le développement d'applications web côté serveur."
   },
   {
-    title: "Administrateur Sytème",
-    href: "/docs/primitives/tooltip",
-    description:
-      "Un administrateur système gère, configure et maintient les serveurs et les réseaux d'une organisation pour garantir leur bon fonctionnement et leur sécurité.",
+    title: "Python",
+    href: "/docs/python",
+    description: "Langage polyvalent utilisé en data, web, IA, scripting et plus encore."
   },
   {
-    title: "Graphiste || Branding",
-    href: "/docs/primitives/tooltip",
-    description:
-      "Un graphiste crée des visuels esthétiques et fonctionnels, tandis que le branding consiste à concevoir une identité visuelle cohérente et mémorable pour une marque afin de renforcer son image et sa reconnaissance",
+    title: "Java",
+    href: "/docs/java",
+    description: "Langage orienté objet largement utilisé pour les applications d’entreprise, Android et backend."
   },
   {
-    title: "----> Toutes les formations",
-    href: "/formation",
-    description:
-      "Cliquez ici pour découvrir l'ensemble de nos offres et accéder à toutes les ressources disponibles pour vous perfectionner !",
+    title: "Spring Boot",
+    href: "/docs/spring-boot",
+    description: "Framework Java simplifiant la création de services web et d’API REST."
   },
+  {
+    title: "Node.js",
+    href: "/docs/nodejs",
+    description: "Environnement d'exécution JavaScript côté serveur, idéal pour les applications temps réel."
+  },
+  {
+    title: "NestJS",
+    href: "/docs/nestjs",
+    description: "Framework Node.js structuré et modulaire basé sur TypeScript, inspiré d’Angular."
+  },
+  {
+    title: "Express.js",
+    href: "/docs/expressjs",
+    description: "Framework minimaliste pour construire des API et applications web avec Node.js."
+  },
+  {
+    title: "Django",
+    href: "/docs/django",
+    description: "Framework Python haut niveau pour construire rapidement des applications web robustes."
+  },
+  {
+    title: "Algorithmique",
+    href: "/docs/algorithmique",
+    description: "Discipline fondamentale pour résoudre des problèmes de manière optimisée avec des algorithmes."
+  },
+  {
+    title: "WordPress",
+    href: "/docs/wordpress",
+    description: "CMS populaire pour créer des sites web ou des blogs sans coder."
+  },
+  {
+    title: "PHP",
+    href: "/docs/php",
+    description: "Langage côté serveur largement utilisé pour le développement web dynamique."
+  }, 
+  {
+    title: "UX Design (User Experience)",
+    href: "/docs/ux-design",
+    description:
+      "Conçoit des expériences utilisateur fluides, intuitives et centrées sur les besoins réels des utilisateurs."
+  },
+  {
+    title: "UI Design (User Interface)",
+    href: "/docs/ui-design",
+    description:
+      "Crée des interfaces visuelles attrayantes, cohérentes et fonctionnelles pour le web et le mobile."
+  }, 
+  {
+    title: "Analyse de données et statistiques",
+    href: "/docs/analyse-donnees-statistiques",
+    description:
+      "Comprendre, interpréter et extraire des insights à partir de données grâce aux statistiques."
+  },
+  {
+    title: "Outils d’analyse",
+    href: "/docs/outils-analyse",
+    description:
+      "Maîtrise d’Excel, SQL, Python, Power BI, Tableau pour explorer et visualiser les données."
+  },
+  {
+    title: "Préparation et traitement des données",
+    href: "/docs/preparation-traitement-donnees",
+    description:
+      "Nettoyer, transformer et structurer les données pour les rendre exploitables en analyse."
+  },
+  {
+    title: "Pensée analytique et résolution de problèmes",
+    href: "/docs/pensee-analytique",
+    description:
+      "Développer un raisonnement logique pour poser les bonnes questions et tirer des conclusions pertinentes."
+  },
+  {
+    title: "Notions de machine learning",
+    href: "/docs/machine-learning-bases",
+    description:
+      "Appréhender les algorithmes de base pour prédire et classer à partir de données."
+  },
+  {
+    title: "Notions de business intelligence",
+    href: "/docs/business-intelligence",
+    description:
+      "Utiliser les outils BI pour produire des rapports interactifs et aider à la prise de décision."
+  },
+  {
+    title: "Git & versioning",
+    href: "/docs/git-versioning",
+    description:
+      "Collaborer efficacement sur des projets data grâce au contrôle de version avec Git et GitHub."
+  }, 
+  {
+    title: "Stratégie réseaux sociaux",
+    href: "/docs/strategie-reseaux-sociaux",
+    description:
+      "Définir les objectifs, cibler les audiences et planifier les contenus sur chaque plateforme."
+  },
+  {
+    title: "Outils de gestion & publication",
+    href: "/docs/outils-gestion-publication",
+    description:
+      "Maîtriser des outils comme Hootsuite, Buffer ou Meta Business Suite pour planifier et analyser."
+  },
+  {
+    title: "Création de contenu",
+    href: "/docs/creation-contenu",
+    description:
+      "Produire des visuels, vidéos et textes engageants adaptés à chaque réseau social."
+  },
+  {
+    title: "Animation et modération de communauté",
+    href: "/docs/animation-moderation",
+    description:
+      "Interagir avec les abonnés, modérer les échanges et renforcer la communauté."
+  },
+  {
+    title: "Analyse et reporting",
+    href: "/docs/analyse-reporting",
+    description:
+      "Mesurer la performance des actions, interpréter les données et adapter la stratégie."
+  },
+  {
+    title: "Culture web & tendances digitales",
+    href: "/docs/culture-web-tendances",
+    description:
+      "Rester à jour sur les mèmes, les formats, les plateformes émergentes et les comportements en ligne."
+  },
+  {
+    title: "Marketing digital (complémentaire)",
+    href: "/docs/marketing-digital",
+    description:
+      "Comprendre les bases du SEO, de la publicité en ligne et des tunnels de conversion."
+  }
 ];
 
 export function NavigationMenuDemo() {
@@ -83,14 +205,14 @@ export function NavigationMenuDemo() {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Metiers Dev</NavigationMenuTrigger>
+          <NavigationMenuTrigger>Metiers Tech</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
                   <Link
                     className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                    href="/"
+                    href="/metiers"
                   >
                     <RiComputerFill size={100} className="text-purple-950" />
                     <div className="mb-2 mt-4 text-lg font-medium">Metiers</div>
@@ -100,13 +222,11 @@ export function NavigationMenuDemo() {
                   </Link>
                 </NavigationMenuLink>
               </li>
-              <ListItem href="/docs" title="Développeur IA">
-                Créer des applications avancées avec l'intelligence artificielle
+             
+              <ListItem href="/docs" title="UX/UI Designer">
+              Crée des interfaces utilisateurs attractives et intuitives.
               </ListItem>
-              <ListItem href="/docs" title="Développeur Desktop">
-                Concevoir des applications bureaux
-              </ListItem>
-              <ListItem href="/docs" title="Développeur Front">
+              <ListItem href="/docs" title="Développeur Front End">
                 Concevoir et optimiser l’interface utilisateur des sites et
                 applications web en assurant une expérience fluide et
                 responsive.
@@ -126,15 +246,18 @@ export function NavigationMenuDemo() {
                 title="Développeur CMS"
               >
                 Développer et concevoir des applications avec des CMS.
+              </ListItem> 
+              <ListItem href="/metiers" title="Tous les metiers Tech ">
+              Voir tous les metiers tech disponibles en formation actuellement
               </ListItem>
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Formations</NavigationMenuTrigger>
+          <NavigationMenuTrigger>Cours</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-              {components.map((component) => (
+              {components.slice(0, 10).map((component) => (
                 <ListItem
                   key={component.title}
                   title={component.title}

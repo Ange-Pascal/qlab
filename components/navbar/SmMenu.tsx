@@ -30,45 +30,45 @@ export function SmMenu() {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            Profile
+            Paramètre
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            Mes formations
-            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+            Mon apprentissage
+            <DropdownMenuShortcut>⌘A</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Link href="/dashboard">Dashboard</Link>
-            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+            <DropdownMenuShortcut>⌘D</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            Keyboard shortcuts
-            <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
+            Ajouter un cours
+            <DropdownMenuShortcut>⌘A</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>Team</DropdownMenuItem>
+          <DropdownMenuItem>Projets</DropdownMenuItem>
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>Consulting</DropdownMenuSubTrigger>
             <DropdownMenuPortal>
               <DropdownMenuSubContent>
-                <DropdownMenuItem>Email</DropdownMenuItem>
-                <DropdownMenuItem>Message</DropdownMenuItem>
+                <DropdownMenuItem>Infos</DropdownMenuItem>
+                <DropdownMenuItem>Contacts</DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>More...</DropdownMenuItem>
               </DropdownMenuSubContent>
             </DropdownMenuPortal>
           </DropdownMenuSub>
           <DropdownMenuItem>
-            New Team
+            Bourses
             <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Projets</DropdownMenuItem>
+        <DropdownMenuItem>Contacts</DropdownMenuItem>
         <DropdownMenuItem>Réseaux Sociaux</DropdownMenuItem>
-        <DropdownMenuItem disabled>API</DropdownMenuItem>
+        <DropdownMenuItem>Faq</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <Link href="/connexion">Se Connecter</Link>
