@@ -4,6 +4,11 @@ import Image from "next/image";
 import ReactPlayer from "react-player";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import Link from "next/link"; // à importer
+
+function generateSlug(title: string): string {
+  return title.toLowerCase().replace(/\s+/g, "-");
+}
 
 const formationsData = [
   {
@@ -424,63 +429,76 @@ export default function FormationPage() {
 
         {/* Formations */}
         {/* Liste des formations */}
-<div className="md:col-span-3">
-  {loading ? (
-    <div className="text-center py-20">Chargement...</div>
-  ) : filteredFormations.length === 0 ? (
-    <div className="text-center py-20 text-gray-500">Aucune formation trouvée.</div>
-  ) : (
-    <motion.div
-      className={`grid gap-6 ${
-        layout === "grid" ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" : "grid-cols-1"
-      }`}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-    >
-      {filteredFormations.map((formation) => (
-        <motion.div
-          key={formation.id}
-          className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
-          whileHover={{ scale: 1.02 }}
-        >
-          <div className="relative h-48">
-            {/* Badge catégorie en haut à gauche */}
-            <div className="absolute top-2 left-2 z-10 text-black bg-white/80 backdrop-blur-sm text-xs px-3 py-1 rounded-full shadow flex items-center">
-              {formation.category}
+        <div className="md:col-span-3">
+          {loading ? (
+            <div className="text-center py-20">Chargement...</div>
+          ) : filteredFormations.length === 0 ? (
+            <div className="text-center py-20 text-gray-500">
+              Aucun cours trouvé.
             </div>
+          ) : (
+            <motion.div
+              className={`grid gap-6 ${
+                layout === "grid"
+                  ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                  : "grid-cols-1"
+              }`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+            >
+              {filteredFormations.map((formation) => {
+                const slug = generateSlug(formation.title);
+                return (
+                  <motion.div
+                    key={formation.id}
+                    className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    {/* Lien sur image + contenu sauf bouton */}
+                    <Link href={`/cours/${slug}`}>
+                      <div className="relative h-48 cursor-pointer">
+                        {/* Badge catégorie */}
+                        <div className="absolute top-2 left-2 z-10 text-black bg-white/80 backdrop-blur-sm text-xs px-3 py-1 rounded-full shadow">
+                          {formation.category}
+                        </div>
+                        {/* Badge localisation */}
+                        <div className="absolute top-2 right-2 z-10 text-black bg-white/80 backdrop-blur-sm text-xs px-3 py-1 rounded-full shadow">
+                          {formation.location}
+                        </div>
+                        <Image
+                          src={formation.thumbnail}
+                          alt={formation.title}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <div className="p-5 space-y-2">
+                        <h3 className="text-lg font-semibold text-black line-clamp-2">
+                          {formation.title}
+                        </h3>
+                        <div className="text-sm text-gray-700">
+                          <span className="font-medium">Prix :</span>{" "}
+                          {formation.price}
+                        </div>
+                        <div className="text-sm text-gray-700">
+                          <span className="font-medium">Langue :</span>{" "}
+                          {formation.language}
+                        </div>
+                      </div>
+                    </Link>
 
-            {/* Badge localisation en haut à droite */}
-            <div className="absolute top-2 right-2 z-10 text-black bg-white/80 backdrop-blur-sm text-xs px-3 py-1 rounded-full shadow flex items-center">
-              {formation.location}
-            </div>
-
-            <Image
-              src={formation.thumbnail}
-              alt={formation.title}
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="p-5 space-y-2">
-            <h3 className="text-lg font-semibold text-black line-clamp-2">
-              {formation.title}
-            </h3>
-            <div className="text-sm text-gray-700">
-              <span className="font-medium">Prix :</span> {formation.price}
-            </div>
-            <div className="text-sm text-gray-700">
-              <span className="font-medium">Langue :</span> {formation.language}
-            </div>
-            <Button className="mt-2 w-full bg-violet-600 text-white py-2 px-4 rounded-xl hover:bg-violet-900 transition">
-              S'inscrire
-            </Button>
-          </div>
-        </motion.div>
-      ))}
-    </motion.div>
-  )}
-</div>
-
+                    {/* Bouton en dehors du lien */}
+                    <div className="px-5 pb-5">
+                      <Button className="mt-2 w-full bg-violet-600 text-white py-2 px-4 rounded-xl hover:bg-violet-900 transition">
+                        S'inscrire
+                      </Button>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          )}
+        </div>
       </section>
     </main>
   );

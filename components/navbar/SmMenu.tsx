@@ -34,7 +34,7 @@ export function SmMenu() {
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            Mon apprentissage
+            <Link href='/mes-cours'>Mes cours </Link>
             <DropdownMenuShortcut>⌘A</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
