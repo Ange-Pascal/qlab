@@ -2,6 +2,9 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import api from '@/utils/api';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 export default function RegisterPage() {
   const [fullName, setFullName] = useState('');
@@ -9,21 +12,40 @@ export default function RegisterPage() {
   const [photo, setPhoto] = useState<File | null>(null);
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); 
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+  
     const formData = new FormData();
-    formData.append('fullName', fullName);
+    formData.append('name', fullName); // Attention : utiliser les bons noms côté Laravel !
     formData.append('email', email);
-    formData.append('phone', phone);
+    formData.append('phone_number', phone);
     formData.append('password', password);
     if (photo) {
-      formData.append('photo', photo);
+      formData.append('photo_url', photo); // nom attendu côté Laravel
     }
-
-    // 🔐 Envoie formData vers ton backend ici (ex: axios.post('/register', formData))
-    console.log('Inscription en cours...');
+  
+    try {
+      const response = await api.post('/comptes', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+  
+      toast.success('Inscription réussie ✅');
+    
+    // ⏳ petite pause avant redirection
+    setTimeout(() => {
+      router.push('/metiers');
+    }, 1000);
+  
+    } catch (error: any) {
+      console.error('Erreur lors de l’inscription :', error.response?.data || error.message);
+      alert('Erreur lors de l’inscription');
+    }
   };
 
   return (

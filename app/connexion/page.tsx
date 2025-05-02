@@ -2,18 +2,44 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { toast } from 'react-toastify';
+import api from '@/utils/api';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // 🔐 Appelle ici ton API ou fonction de connexion
-    console.log('Email:', email);
-    console.log('Password:', password);
-  };
+  const router = useRouter();
+
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  try {
+    // Si tu utilises Sanctum, décommente ceci :
+    await api.get('/sanctum/csrf-cookie');
+
+    const response = await api.post('/api/login', {
+      email,
+      password,
+    });
+
+    toast.success('Connexion réussie ✅');
+
+    // ⏳ pause 1 sec avant redirection
+    setTimeout(() => {
+      router.push('/metiers');
+    }, 1000);
+
+  } catch (error: any) {
+    console.error('Erreur de connexion :', error.response?.data || error.message);
+
+    toast.error(
+      error.response?.data?.message || 'Email ou mot de passe incorrect ❌'
+    );
+  }
+};
 
   return (
     <main className="min-h-screen  flex items-center justify-center px-4">

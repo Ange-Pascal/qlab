@@ -1,3 +1,5 @@
+'use client'
+
 import { Button } from "@/components/ui/button";
 import { IoIosMenu } from "react-icons/io";
 
@@ -16,8 +18,26 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
+import { AuthContext } from "@/app/auth-provider";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import api from "@/utils/api";
+import { useContext } from "react";
 
 export function SmMenu() {
+  const { user, setUser } = useContext(AuthContext);
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      await api.post("/logout");
+      setUser(null);
+      toast.success("Déconnexion réussie");
+      router.push("/connexion");
+    } catch (e) {
+      toast.error("Erreur lors de la déconnexion");
+    }
+  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -34,7 +54,7 @@ export function SmMenu() {
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Link href='/mes-cours'>Mes cours </Link>
+            <Link href="/mes-cours">Mes cours </Link>
             <DropdownMenuShortcut>⌘A</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
@@ -70,10 +90,17 @@ export function SmMenu() {
         <DropdownMenuItem>Réseaux Sociaux</DropdownMenuItem>
         <DropdownMenuItem>Faq</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <Link href="/connexion">Se Connecter</Link>
-          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-        </DropdownMenuItem>
+        {user ? (
+          <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
+            Déconnexion
+            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+          </DropdownMenuItem>
+        ) : (
+          <DropdownMenuItem>
+            <Link href="/connexion">Se Connecter</Link>
+            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+          </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );
