@@ -20,7 +20,7 @@ const handleSubmit = async (e: React.FormEvent) => {
     // Si tu utilises Sanctum, décommente ceci :
     await api.get('/sanctum/csrf-cookie');
 
-    const response = await api.post('/api/login', {
+     await api.post('/api/login', {
       email,
       password,
     });

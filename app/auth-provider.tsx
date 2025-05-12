@@ -3,7 +3,7 @@
 import { createContext, useEffect, useState } from "react";
 import api from "@/utils/api";
 
-export const AuthContext = createContext<any>(null);
+export const AuthContext = createContext<unknown>(null);
 
 export default function AuthProvider({
   children,
