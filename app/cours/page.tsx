@@ -503,3 +503,4 @@ export default function FormationPage() {
     </main>
   );
 }
+

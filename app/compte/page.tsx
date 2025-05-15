@@ -20,7 +20,7 @@ export default function RegisterPage() {
     e.preventDefault();
   
     const formData = new FormData();
-    formData.append('name', fullName); // Attention : utiliser les bons noms côté Laravel !
+    formData.append('name', fullName); // nom attendu côté Laravel !
     formData.append('email', email);
     formData.append('phone_number', phone);
     formData.append('password', password);
@@ -29,7 +29,7 @@ export default function RegisterPage() {
     }
   
     try {
-      const response = await api.post('/comptes', formData, {
+      const response = await api.post('/api/comptes', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

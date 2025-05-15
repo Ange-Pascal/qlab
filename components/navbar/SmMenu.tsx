@@ -18,21 +18,22 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
-import { AuthContext } from "@/app/auth-provider";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { useAuth } from "@/app/auth-provider"; 
 import api from "@/utils/api";
-import { useContext } from "react";
 
 export function SmMenu() {
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser, fetchUser } = useAuth();
   const router = useRouter();
 
   const handleLogout = async () => {
     try {
-      await api.post("/logout");
+      await api.post("/api/auth/logout"); 
+      await fetchUser();
       setUser(null);
-      toast.success("Déconnexion réussie");
+      toast.success("Déconnexion réussie"); 
+      console.log('User deconnecté');
       router.push("/connexion");
     } catch (e) {
       toast.error("Erreur lors de la déconnexion");

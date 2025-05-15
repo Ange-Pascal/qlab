@@ -1,12 +1,28 @@
-// utils/api.ts
 import axios from 'axios';
 
+function getCookie(name: string): string | null {
+  const matches = document.cookie.match(
+    new RegExp('(?:^|; )' + name.replace(/([$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
+  );
+  return matches ? decodeURIComponent(matches[1]) : null;
+}
+
 const api = axios.create({
-  baseURL: 'http://127.0.0.1:8000/', // ton API Laravel
-  withCredentials: true, // si tu utilises cookies ou Sanctum
+  baseURL: 'http://localhost:8000',
+  withCredentials: true,
   headers: {
-    'Accept': 'application/json',
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
   },
+});
+
+// Injecte automatiquement le token CSRF dans chaque requête
+api.interceptors.request.use((config) => {
+  const token = getCookie('XSRF-TOKEN');
+  if (token) {
+    config.headers['X-XSRF-TOKEN'] = token;
+  }
+  return config;
 });
 
 export default api;
