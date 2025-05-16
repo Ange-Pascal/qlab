@@ -272,7 +272,7 @@ export function NavigationMenuDemo() {
         <NavigationMenuItem>
           <Link href="/background" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Background
+              Projets
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
