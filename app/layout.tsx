@@ -48,3 +48,40 @@ export default function RootLayout({
     </html>
   );
 }
+
+// import Container from "@/components/global/Container";
+// import Providers from "./providers";
+// import "./globals.css";
+// import { ToastContainer } from "react-toastify";
+// import Footer from "@/components/footer/Footer";
+// import AuthProvider from "./auth-provider";
+// import Navbar from "@/components/navbar/Navbar";
+// 
+// //Remove-Item -Recurse -Force .next
+// 
+// // le probleme est au niveau de la navbar 
+// 
+// // app/layout.tsx
+// export const metadata = {
+//   title: "QLab",
+//   description: "Qavaa Innovate Lab",
+// };
+// 
+// export default function RootLayout({ children }) {
+//   return (
+//     <html lang="en">
+//       <body>
+//         <AuthProvider>
+//           <Providers>
+//             {/* <Navbar /> */}
+//             <Container className="py-20">{children}</Container>
+//             <ToastContainer position="top-right" autoClose={3000} />
+//             <Footer />
+//           </Providers>
+//         </AuthProvider>
+// 
+//         {/* {children} */}
+//       </body>
+//     </html>
+//   );
+// }

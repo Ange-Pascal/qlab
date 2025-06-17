@@ -1,11 +1,13 @@
 import axios from 'axios';
 
 function getCookie(name: string): string | null {
+  if (typeof document === "undefined") return null; // <- AJOUTÉ !
   const matches = document.cookie.match(
     new RegExp('(?:^|; )' + name.replace(/([$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
   );
   return matches ? decodeURIComponent(matches[1]) : null;
 }
+
 
 const api = axios.create({
   baseURL: 'http://localhost:8000',

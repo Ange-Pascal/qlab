@@ -1,326 +1,45 @@
 "use client";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import ReactPlayer from "react-player";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Link from "next/link"; // à importer
+import api from "@/utils/api";
 
 function generateSlug(title: string): string {
   return title.toLowerCase().replace(/\s+/g, "-");
 }
 
-const formationsData = [
-  {
-    id: 1,
-    title: "React.js",
-    category: "Développement",
-    price: "Gratuit",
-    location: "En ligne",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 2,
-    title: "Next.js",
-    category: "Développement",
-    price: "Gratuit",
-    location: "En ligne",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 3,
-    title: "Tailwind CSS",
-    category: "Développement",
-    price: "Gratuit",
-    location: "En ligne",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 4,
-    title: "HTML",
-    category: "Développement",
-    price: "Gratuit",
-    location: "En ligne",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 5,
-    title: "CSS",
-    category: "Développement",
-    price: "Gratuit",
-    location: "En ligne",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 6,
-    title: "JavaScript",
-    category: "Développement",
-    price: "Gratuit",
-    location: "En ligne",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 7,
-    title: "Laravel",
-    category: "Développement",
-    price: "Gratuit",
-    location: "En ligne",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 8,
-    title: "Python",
-    category: "Développement",
-    price: "Gratuit",
-    location: "En ligne",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 9,
-    title: "Java",
-    category: "Développement",
-    price: "Gratuit",
-    location: "En ligne",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 10,
-    title: "Spring Boot",
-    category: "Développement",
-    price: "Gratuit",
-    location: "En ligne",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 11,
-    title: "Node.js",
-    category: "Développement",
-    price: "Gratuit",
-    location: "En ligne",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 12,
-    title: "NestJS",
-    category: "Développement",
-    price: "Gratuit",
-    location: "En ligne",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 13,
-    title: "Express.js",
-    category: "Développement",
-    price: "Gratuit",
-    location: "En ligne",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 14,
-    title: "Django",
-    category: "Développement",
-    price: "Gratuit",
-    location: "En ligne",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 15,
-    title: "Algorithmique",
-    category: "Développement",
-    price: "Gratuit",
-    location: "En ligne",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 16,
-    title: "WordPress",
-    category: "Développement",
-    price: "Gratuit",
-    location: "En ligne",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 17,
-    title: "PHP",
-    category: "Développement",
-    price: "Gratuit",
-    location: "En ligne",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 18,
-    title: "UX Design (User Experience)",
-    category: "Design",
-    price: "Payant",
-    location: "Présentiel",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 19,
-    title: "UI Design (User Interface)",
-    category: "Design",
-    price: "Gratuit",
-    location: "En ligne",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 20,
-    title: "Analyse de données et statistiques",
-    category: "Data",
-    price: "Gratuit",
-    location: "En ligne",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 21,
-    title: "Outils d’analyse",
-    category: "Data Science",
-    price: "Payant",
-    location: "Présentiel",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 22,
-    title: "Préparation et traitement des données",
-    category: "Big Data",
-    price: "Gratuit",
-    location: "Hybride",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 23,
-    title: "Pensée analytique et résolution de problèmes",
-    category: "Compétences Transversales",
-    price: "Payant",
-    location: "En ligne",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 24,
-    title: "Notions de machine learning",
-    category: "Intelligence Artificielle",
-    price: "Gratuit",
-    location: "Présentiel",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 25,
-    title: "Notions de business intelligence",
-    category: "Business",
-    price: "Payant",
-    location: "Hybride",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 26,
-    title: "Git & versioning",
-    category: "Outils collaboratifs",
-    price: "Gratuit",
-    location: "En ligne",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-
-  {
-    id: 27,
-    title: "Stratégie réseaux sociaux",
-    category: "Marketing Digital",
-    price: "Gratuit",
-    location: "En ligne",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 28,
-    title: "Outils de gestion & publication",
-    category: "Community Management",
-    price: "Payant",
-    location: "Présentiel",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 29,
-    title: "Création de contenu",
-    category: "Créativité",
-    price: "Gratuit",
-    location: "Hybride",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 30,
-    title: "Animation et modération de communauté",
-    category: "Community Management",
-    price: "Payant",
-    location: "En ligne",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 31,
-    title: "Analyse et reporting",
-    category: "Marketing",
-    price: "Gratuit",
-    location: "Présentiel",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 32,
-    title: "Culture web & tendances digitales",
-    category: "Culture Numérique",
-    price: "Gratuit",
-    location: "Hybride",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-  {
-    id: 33,
-    title: "Marketing digital",
-    category: "Marketing",
-    price: "Payant",
-    location: "En ligne",
-    language: "Français",
-    thumbnail: "/images/learning.jpg",
-  },
-];
-
 export default function FormationPage() {
+  const [coursesData, setCoursesData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
   const [layout, setLayout] = useState<"grid" | "list">("grid");
   const [filters, setFilters] = useState({
     category: "",
     price: "",
-    location: "",
+    trainingSpace: "",
     language: "",
     search: "",
   });
-  const [loading, setLoading] = useState(false);
+  // charger les formations Via l'api
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await api.get("api/courses"); 
+        console.log("Réponse API :", response.data);
+        setCoursesData(response.data.data);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des cours:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCourses();
+  }, []);
+
+  // const [loading, setLoading] = useState(false);
 
   const handleFilterChange = (field: string, value: string) => {
     setLoading(true);
@@ -330,17 +49,25 @@ export default function FormationPage() {
     }, 300); // simulate loading delay
   };
 
-  const filteredFormations = useMemo(() => {
-    return formationsData.filter(
+  const filteredCourses = useMemo(() => {
+    return coursesData.filter(
       (f) =>
         (!filters.category || f.category === filters.category) &&
         (!filters.price || f.price === filters.price) &&
-        (!filters.location || f.location === filters.location) &&
+        (!filters.trainingSpace || f.location === filters.trainingSpace) &&
         (!filters.language || f.language === filters.language) &&
         (!filters.search ||
           f.title.toLowerCase().includes(filters.search.toLowerCase()))
     );
-  }, [filters]);
+  }, [filters, coursesData]); 
+
+//   if (loading || !coursesData || coursesData.length === 0) {
+//   return (
+//     <main className="py-20 text-center text-gray-500">
+//       {loading ? "Chargement..." : "Aucune formation disponible."}
+//     </main>
+//   );
+// }
 
   return (
     <main className=" pb-20">
@@ -427,12 +154,12 @@ export default function FormationPage() {
           </div>
         </div>
 
-        {/* Formations */}
-        {/* Liste des formations */}
+        {/* Cours */}
+        {/* Liste des cours */}
         <div className="md:col-span-3">
           {loading ? (
             <div className="text-center py-20">Chargement...</div>
-          ) : filteredFormations.length === 0 ? (
+          ) : filteredCourses.length === 0 ? (
             <div className="text-center py-20 text-gray-500">
               Aucun cours trouvé.
             </div>
@@ -446,11 +173,11 @@ export default function FormationPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
             >
-              {filteredFormations.map((formation) => {
-                const slug = generateSlug(formation.title);
+              {filteredCourses.map((course) => {
+                const slug = generateSlug(course.title);
                 return (
                   <motion.div
-                    key={formation.id}
+                    key={course.id}
                     className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
                     whileHover={{ scale: 1.02 }}
                   >
@@ -459,30 +186,30 @@ export default function FormationPage() {
                       <div className="relative h-48 cursor-pointer">
                         {/* Badge catégorie */}
                         <div className="absolute top-2 left-2 z-10 text-black bg-white/80 backdrop-blur-sm text-xs px-3 py-1 rounded-full shadow">
-                          {formation.category}
+                          {course.category}
                         </div>
                         {/* Badge localisation */}
                         <div className="absolute top-2 right-2 z-10 text-black bg-white/80 backdrop-blur-sm text-xs px-3 py-1 rounded-full shadow">
-                          {formation.location}
+                          {course.trainingSpace}
                         </div>
                         <Image
-                          src={formation.thumbnail}
-                          alt={formation.title}
+                          src={course.course_image}
+                          alt={course.title}
                           fill
                           className="object-cover"
                         />
                       </div>
                       <div className="p-5 space-y-2">
                         <h3 className="text-lg font-semibold text-black line-clamp-2">
-                          {formation.title}
+                          {course.title}
                         </h3>
                         <div className="text-sm text-gray-700">
                           <span className="font-medium">Prix :</span>{" "}
-                          {formation.price}
+                          {course.price}
                         </div>
                         <div className="text-sm text-gray-700">
                           <span className="font-medium">Langue :</span>{" "}
-                          {formation.language}
+                          {course.language}
                         </div>
                       </div>
                     </Link>
@@ -503,4 +230,3 @@ export default function FormationPage() {
     </main>
   );
 }
-
