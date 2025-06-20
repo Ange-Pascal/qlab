@@ -16,37 +16,58 @@ export default function RegisterPage() {
 
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-  
-    const formData = new FormData();
-    formData.append('name', fullName); // nom attendu côté Laravel !
-    formData.append('email', email);
-    formData.append('phone_number', phone);
-    formData.append('password', password);
-    if (photo) {
-      formData.append('photo_url', photo); // nom attendu côté Laravel
-    }
-  
-    try {
-      const response = await api.post('/api/comptes', formData, {
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  const formData = new FormData();
+  formData.append('name', fullName);
+  formData.append('email', email);
+  formData.append('phone_number', phone);
+  formData.append('password', password);
+  if (photo) {
+    formData.append('photo_url', photo);
+  }
+
+  try {
+    // 1. D'abord on récupère le cookie CSRF (nécessaire pour Sanctum)
+    await api.get('/sanctum/csrf-cookie', {
+      withCredentials: true,
+    });
+
+    // 2. On envoie la requête d’inscription
+    await api.post('/api/comptes', formData, {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    // 3. Ensuite, on appelle l’API de login
+    await api.post(
+      'api/login',
+      {
+        email,
+        password,
+      },
+      {
+        withCredentials: true,
         headers: {
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'application/json',
         },
-      });
-  
-      toast.success('Inscription réussie ✅');
-    
-    // ⏳ petite pause avant redirection
+      }
+    );
+
+    toast.success('Inscription et connexion réussies ✅');
+
+    // Rediriger vers la page souhaitée
     setTimeout(() => {
       router.push('/metiers');
     }, 1000);
-  
-    } catch (error: any) {
-      console.error('Erreur lors de l’inscription :', error.response?.data || error.message);
-      alert('Erreur lors de l’inscription');
-    }
-  };
+  } catch (error: any) {
+    console.error('Erreur :', error.response?.data || error.message);
+    alert('Erreur lors de l’inscription ou la connexion');
+  }
+};
 
   return (
     <main className="min-h-screen  flex items-center justify-center px-4">

@@ -51,7 +51,6 @@ export default function AddCourseForm() {
     }
     console.log("FormData brut :", [...form.entries()]);
 
-
     try {
       const res = await api.post("/api/courses", form, {
         headers: {
@@ -71,24 +70,9 @@ export default function AddCourseForm() {
       });
       setImageFile(null);
     } catch (err: any) {
-      if (err.response && err.response.status === 422) {
-        const errors = err.response.data.errors;
-
-        // Affiche chaque message d'erreur dans la console
-        console.error("Validation errors:");
-        Object.entries(errors).forEach(([field, messages]) => {
-          console.error(`${field}: ${messages}`);
-        });
-
-        // Affiche le premier message d'erreur à l'utilisateur
-        const firstError = Object.values(errors)[0] as string[];
-        setError(firstError[0]);
-      } else {
-        console.error("Erreur inattendue:", err);
-        setError("Une erreur s'est produite lors de l'ajout du cours.");
-      }
-    } finally {
-      setLoading(false);
+      console.error("Erreur complète :", err);
+      console.log("Réponse API :", err?.response?.data);
+      setError(err?.response?.data?.error || "Une erreur s'est produite.");
     }
   };
 

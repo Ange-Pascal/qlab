@@ -7,6 +7,7 @@ import Providers from "./providers";
 import Footer from "@/components/footer/Footer";
 import { ToastContainer } from "react-toastify";
 import AuthProvider from "./auth-provider";
+import LayoutWrapper from "@/components/layout/LayoutWrapper";
 
 const inter = Montserrat({
   variable: "--font-inter-sans",
@@ -37,10 +38,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <AuthProvider>
-          <Providers>
-            <Navbar />
-            <Container className="py-20">{children}</Container>
+          <Providers> 
+            <LayoutWrapper>
+              <Container className="py-20">{children}</Container>
             <ToastContainer position="top-right" autoClose={3000} />
+            </LayoutWrapper>
+            {/* <Navbar /> */}
+            
             <Footer />
           </Providers>
         </AuthProvider>

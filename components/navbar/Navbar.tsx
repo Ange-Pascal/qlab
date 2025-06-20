@@ -35,7 +35,7 @@ function Navbar() {
       <Container className="flex flex-col sm:flex-row sm:justify-between sm:items-center flex-wrap py-5 ">
         <Logo /> 
         {/* Le probleme est ici mais je ferai un roolback sur git */}
-        {/* <span className="hidden xl:block md:block "><NavigationMenuDemo /></span> */} 
+        <span className="hidden xl:block md:block "><NavigationMenuDemo /></span> 
         
         <div className="flex gap-4 items-center"> 
           {/* <NavSearch /> */}

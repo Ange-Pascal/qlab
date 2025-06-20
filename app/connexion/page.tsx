@@ -32,9 +32,9 @@ export default function LoginPage() {
       toast.success("Connexion réussie ✅");
 
       // ⏳ pause 1 sec avant redirection
-      setTimeout(() => {
+      // setTimeout(() => {
         router.push("/metiers");
-      }, 1000);
+      // }, 1000);
     } catch (error: any) {
       console.error(
         "Erreur de connexion :",

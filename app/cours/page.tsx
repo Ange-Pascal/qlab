@@ -18,7 +18,7 @@ export default function FormationPage() {
   const [filters, setFilters] = useState({
     category: "",
     price: "",
-    trainingSpace: "",
+    training_space: "",
     language: "",
     search: "",
   });
@@ -54,7 +54,7 @@ export default function FormationPage() {
       (f) =>
         (!filters.category || f.category === filters.category) &&
         (!filters.price || f.price === filters.price) &&
-        (!filters.trainingSpace || f.location === filters.trainingSpace) &&
+        (!filters.training_space || f.training_space === filters.training_space) &&
         (!filters.language || f.language === filters.language) &&
         (!filters.search ||
           f.title.toLowerCase().includes(filters.search.toLowerCase()))
@@ -190,10 +190,10 @@ export default function FormationPage() {
                         </div>
                         {/* Badge localisation */}
                         <div className="absolute top-2 right-2 z-10 text-black bg-white/80 backdrop-blur-sm text-xs px-3 py-1 rounded-full shadow">
-                          {course.trainingSpace}
+                          {course.training_space}
                         </div>
                         <Image
-                          src={course.course_image}
+                          src={`http://localhost:8000${course.course_image}`}
                           alt={course.title}
                           fill
                           className="object-cover"
