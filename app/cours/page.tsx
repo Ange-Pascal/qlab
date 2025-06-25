@@ -1,11 +1,13 @@
 "use client";
 import { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
-import ReactPlayer from "react-player";
+// import ReactPlayer from "react-player";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Link from "next/link"; // à importer
 import api from "@/utils/api";
+import dynamic from "next/dynamic";
+const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 function generateSlug(title: string): string {
   return title.toLowerCase().replace(/\s+/g, "-");
@@ -27,7 +29,7 @@ export default function FormationPage() {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await api.get("api/courses"); 
+        const response = await api.get("api/courses");
         console.log("Réponse API :", response.data);
         setCoursesData(response.data.data);
       } catch (error) {
@@ -54,20 +56,21 @@ export default function FormationPage() {
       (f) =>
         (!filters.category || f.category === filters.category) &&
         (!filters.price || f.price === filters.price) &&
-        (!filters.training_space || f.training_space === filters.training_space) &&
+        (!filters.training_space ||
+          f.training_space === filters.training_space) &&
         (!filters.language || f.language === filters.language) &&
         (!filters.search ||
           f.title.toLowerCase().includes(filters.search.toLowerCase()))
     );
-  }, [filters, coursesData]); 
+  }, [filters, coursesData]);
 
-//   if (loading || !coursesData || coursesData.length === 0) {
-//   return (
-//     <main className="py-20 text-center text-gray-500">
-//       {loading ? "Chargement..." : "Aucune formation disponible."}
-//     </main>
-//   );
-// }
+  //   if (loading || !coursesData || coursesData.length === 0) {
+  //   return (
+  //     <main className="py-20 text-center text-gray-500">
+  //       {loading ? "Chargement..." : "Aucune formation disponible."}
+  //     </main>
+  //   );
+  // }
 
   return (
     <main className=" pb-20">
@@ -192,12 +195,22 @@ export default function FormationPage() {
                         <div className="absolute top-2 right-2 z-10 text-black bg-white/80 backdrop-blur-sm text-xs px-3 py-1 rounded-full shadow">
                           {course.training_space}
                         </div>
-                        <Image
-                          src={`http://localhost:8000${course.course_image}`}
-                          alt={course.title}
-                          fill
-                          className="object-cover"
-                        />
+                        {typeof course.course_image === "string" &&
+                          course.course_image.trim() !== "" && (
+                            <Image
+                              src={
+                                course.course_image &&
+                                course.course_image.startsWith("http")
+                                  ? course.course_image
+                                  : course.course_image
+                                  ? `${process.env.NEXT_PUBLIC_API_URL}${course.course_image}`
+                                  : "/images/frontend.jpg"
+                              }
+                              alt={course.title}
+                              fill
+                              className="object-cover"
+                            />
+                          )}
                       </div>
                       <div className="p-5 space-y-2">
                         <h3 className="text-lg font-semibold text-black line-clamp-2">
