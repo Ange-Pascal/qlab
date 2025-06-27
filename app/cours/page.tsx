@@ -199,13 +199,7 @@ export default function FormationPage() {
                           course.course_image.trim() !== "" && (
                             <Image
                               src={
-                                course.course_image &&
-                                course.course_image.startsWith("http")
-                                  ? course.course_image
-                                  : course.course_image
-                                  ? `${process.env.NEXT_PUBLIC_API_URL}${course.course_image}`
-                                  : "/images/frontend.jpg"
-                              }
+                              course.course_image }
                               alt={course.title}
                               fill
                               className="object-cover"
