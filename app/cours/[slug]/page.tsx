@@ -337,7 +337,7 @@ export default function FormationSinglePage({ params }: { params: { slug: string
         <div className="space-y-2 text-gray-800 text-lg">
           <p><strong>Catégorie :</strong> {formation.category}</p>
           <p><strong>Prix :</strong> {formation.price}</p>
-          <p><strong>Langue :</strong> {formation.language}</p>
+          <p><strong>Langue :</strong> {formation.language}</p> 
           <p><strong>Localisation :</strong> {formation.location}</p>
         </div>
 
