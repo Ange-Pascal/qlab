@@ -9,9 +9,7 @@ import api from "@/utils/api";
 import dynamic from "next/dynamic";
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
-function generateSlug(title: string): string {
-  return title.toLowerCase().replace(/\s+/g, "-");
-}
+
 
 export default function FormationPage() {
   const [coursesData, setCoursesData] = useState<any[]>([]);
@@ -176,8 +174,8 @@ export default function FormationPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
             >
-              {filteredCourses.map((course) => {
-                const slug = generateSlug(course.title);
+              {filteredCourses.map((course) => { 
+                console.log("Course rendu :", course);
                 return (
                   <motion.div
                     key={course.id}
@@ -185,7 +183,7 @@ export default function FormationPage() {
                     whileHover={{ scale: 1.02 }}
                   >
                     {/* Lien sur image + contenu sauf bouton */}
-                    <Link href={`/cours/${slug}`}>
+                    <Link href={`/courses/${course.slug}`}>
                       <div className="relative h-48 cursor-pointer">
                         {/* Badge catégorie */}
                         <div className="absolute top-2 left-2 z-10 text-black bg-white/80 backdrop-blur-sm text-xs px-3 py-1 rounded-full shadow">
