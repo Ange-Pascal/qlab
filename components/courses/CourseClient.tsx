@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import CourseInfoTabs from "@/components/courses/CourseInfoTabs";
+import DeleteCourseButton from "./DeleteCourseButton";
 // import DeleteCourseButton from "@/components/courses/DeleteCourseButton";
 
 interface Course {
@@ -36,9 +37,9 @@ export default function CourseClient({ course }: { course: Course }) {
 
         <div className="flex gap-6">
           <Link href={`/courses/${course.slug}/edit`} className="text-blue-600 hover:underline">
-            Modifier
+            Update
           </Link>
-          {/* <DeleteCourseButton slug={course.slug} /> */}
+          <DeleteCourseButton slug={course.slug} />
         </div>
 
         <Button

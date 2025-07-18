@@ -15,7 +15,7 @@ export type Course = {
   duration: number;
 };
 
-const CourseContext = createContext<Course[]| null>(null); 
+const CourseContext = createContext<Course | null>(null); 
 
 export const useCourse = () =>{
     const context = useContext(CourseContext); 

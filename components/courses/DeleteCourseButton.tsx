@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
+import { useState } from "react"; 
+import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import api from "@/utils/api";
 type DeleteCourseButtonProps = {
@@ -39,33 +39,32 @@ export default function DeleteCourseButton({ slug }: DeleteCourseButtonProps) {
         onClick={() => setShowConfirm(true)}
         className="text-red-600 hover:underline"
       >
-        Supprimer
+        Delete
       </button>
 
       {showConfirm && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 shadow-xl max-w-sm w-full">
-            <h2 className="text-lg font-semibold mb-4">
-              Confirmer la suppression
+            <h2 className="text-lg font-semibold mb-4 text-red-600">
+              Confirm removal
             </h2>
-            <p className="mb-6">
-              Êtes-vous sûr de vouloir supprimer ce cours ? Cette action est
-              irréversible.
+            <p className="mb-6 text-black">
+              Are you sure you want to delete this course?
             </p>
             <div className="flex justify-end gap-4">
               <button
                 disabled={loading}
                 onClick={() => setShowConfirm(false)}
-                className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+                className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 text-black"
               >
-                Annuler
+                Cancel
               </button>
               <button
                 disabled={loading}
                 onClick={handleDelete}
                 className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
               >
-                {loading ? "Suppression..." : "Supprimer"}
+                {loading ? "Deleted..." : "Delete"}
               </button>
             </div>
           </div>
