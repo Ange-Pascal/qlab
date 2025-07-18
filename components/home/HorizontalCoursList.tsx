@@ -76,7 +76,7 @@ export default function MetiersPage() {
       </section> 
       <div className="flex justify-end mt-4">
         <Link
-          href='/cours'
+          href='/courses'
           className="text-sm font-medium text-yellow-600 hover:underline"
         >
           Voir plus →

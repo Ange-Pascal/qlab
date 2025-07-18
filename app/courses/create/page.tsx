@@ -4,6 +4,7 @@ import { useState } from "react";
 import { PlusCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import api from "@/utils/api"; // ton instance Axios avec CSRF token
+import router from "next/router";
 
 export default function AddCourseForm() {
   const [formData, setFormData] = useState({
@@ -68,7 +69,8 @@ export default function AddCourseForm() {
         duration: "",
         price: "",
       });
-      setImageFile(null);
+      setImageFile(null); 
+      router.push("/courses");
     } catch (err: any) {
       console.error("Erreur complète :", err);
       console.log("Réponse API :", err?.response?.data);

@@ -63,7 +63,7 @@ export function SmMenu() {
             <DropdownMenuShortcut>⌘D</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            Ajouter un cours
+            <Link href="/courses/create">Create a course</Link>
             <DropdownMenuShortcut>⌘A</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>

@@ -33,7 +33,7 @@ export default function LoginPage() {
 
       // ⏳ pause 1 sec avant redirection
       // setTimeout(() => {
-        router.push("/metiers");
+        router.push("/courses");
       // }, 1000);
     } catch (error: any) {
       console.error(

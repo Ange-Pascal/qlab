@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import api from "@/utils/api";
+import { toast } from "react-toastify";
 
 export default function EditCourse() {
   const params = useParams();
@@ -81,14 +82,15 @@ export default function EditCourse() {
 
     // Laravel accepte ?_method=PUT pour formData
     try {
-      await api.post(`/api/courses/${slug}?_method=PUT`, form, {
+      await api.post(`/api/courses/${params.slug}?_method=PUT`, form, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-      });
+      }); 
       setSuccess("Cours mis à jour avec succès !");
+      toast.info("Cours mis à jour avec succès !");
     } catch (err: any) {
-      console.error("Erreur lors de l'update :", err);
+      console.log("Erreur lors de l'update :", err);
       setError(err?.response?.data?.error || "Une erreur est survenue.");
     } finally {
       setLoading(false);
@@ -204,7 +206,7 @@ export default function EditCourse() {
           className="bg-violet-600 text-white px-6 py-2 rounded hover:bg-violet-800"
           disabled={loading}
         >
-          {loading ? "Mise à jour..." : "Mettre à jour le cours"}
+          {loading ? "Course Updated..." : "Update Course"}
         </Button>
       </form>
     </div>
