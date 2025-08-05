@@ -10,7 +10,7 @@ export default function LayoutWrapper({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const noHeaderRoutes = ["/connexion", "/compte"];
+  const noHeaderRoutes = ["/connexion", "/compte", "/instructor/courses/create" ];
 
   const shouldShowHeader = !noHeaderRoutes.includes(pathname);
 
