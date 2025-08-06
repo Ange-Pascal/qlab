@@ -1,6 +1,4 @@
 "use client"; 
-console.log("AuthProvider rendu");
-
 
 import { createContext, useContext, useEffect, useState } from "react";
 import api from "@/utils/api";  
@@ -12,6 +10,7 @@ type User = {
   id: number;
   name: string;
   email: string;
+  roles: string;
   // ajoute d'autres champs si nécessaire
 };
 
@@ -34,7 +33,7 @@ export default function AuthProvider({
   // Fonction pour récupérer l'utilisateur connecté
   const fetchUser = async () => {
     try {
-      console.log("→ Appel de sanctum/csrf-cookie");
+      // console.log("→ Appel de sanctum/csrf-cookie");
       await api.get("/sanctum/csrf-cookie");
 
       console.log("→ Appel de /api/user");
@@ -48,21 +47,6 @@ export default function AuthProvider({
   };
 
 useEffect(() => {
-  // Fonction pour récupérer l'utilisateur connecté
-//   const fetchUser = async () => {
-//     try {
-//       console.log("→ Appel de sanctum/csrf-cookie");
-//       await api.get("/sanctum/csrf-cookie");
-// 
-//       console.log("→ Appel de /api/user");
-//       const res = await api.get("/api/user");
-//       console.log("✅ Utilisateur connecté :", res.data);
-//       setUser(res.data);
-//     } catch (err: any) {
-//       console.error("❌ Erreur de récupération :", err.response?.status, err);
-//       setUser(null);
-//     }
-//   };
 
   fetchUser();
 }, []);

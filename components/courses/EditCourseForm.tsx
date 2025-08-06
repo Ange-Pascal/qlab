@@ -58,7 +58,7 @@ export default function EditCourseForm({ slug, initialData }: Props) {
     }
 
     try {
-      await api.post(`/api/courses/${slug}?_method=PUT`, form, {
+      await api.post(`/api/instructor/courses/${slug}?_method=PUT`, form, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

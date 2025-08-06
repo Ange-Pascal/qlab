@@ -14,7 +14,7 @@ export default function DeleteCourseButton({ slug }: DeleteCourseButtonProps) {
   const handleDelete = async () => {
     setLoading(true);
     try {
-      await api.post(`/api/courses/${slug}?_method=DELETE`, null, {
+      await api.post(`/api/instructor/courses/${slug}?_method=DELETE`, null, {
         headers: {
           "Content-Type": "application/json",
         },

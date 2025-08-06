@@ -36,7 +36,7 @@ export default function CourseClient({ course }: { course: Course }) {
         <p className="max-w-md">{course.description.slice(0, 130)}...</p>
 
         <div className="flex gap-6">
-          <Link href={`/courses/${course.slug}/edit`} className="text-blue-600 hover:underline">
+          <Link href={`/instructor/courses/${course.slug}/edit`} className="text-blue-600 hover:underline">
             Update
           </Link>
           <DeleteCourseButton slug={course.slug} />
