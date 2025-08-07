@@ -10,7 +10,7 @@ type User = {
   id: number;
   name: string;
   email: string;
-  roles: string;
+  roles: string[];
   // ajoute d'autres champs si nécessaire
 };
 

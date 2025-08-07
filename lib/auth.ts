@@ -1,33 +1,25 @@
+// lib/auth.ts
 import { cookies } from "next/headers";
+import apiServer from "@/utils/api-server";
 
 export async function getUserFromServer() {
-  const cookieStore = cookies().toString();
+  const cookieStore = cookies(); // cookies côté serveur
+  const cookieHeader = cookieStore.toString(); // convertit en header utilisable
 
-  const cookieHeader = cookieStore
-    // .getAll()
-    // .map((c) => `${c.name}=${c.value}`)
-    // .join("; ");    
 
-  console.log("🍪 Cookies transmis à Laravel :", cookieHeader);
+    console.log("🧪 Cookies côté serveur :", cookieHeader); // Ajoute ce log
 
   try {
-    const res = await fetch("http://localhost:8000/api/user", {
+    const res = await apiServer.get("/api/user", {
       headers: {
         Cookie: cookieHeader,
-        Accept: "application/json",
+        Origin: "http://localhost:3000"
       },
-      credentials: "include",
-      next: { revalidate: 0 },
     });
 
-    if (!res.ok) {
-      console.error("❌ Réponse non OK :", res.status);
-      return null;
-    }
-
-    return await res.json();
-  } catch (error) {
-    console.error("❌ Erreur getUserFromServer", error);
+    return res.data; // user avec id, email, role, etc.
+  } catch (err: any) { 
+    console.error("Erreur de récupération du user côté serveur message :", err.response?.status, err.message);
     return null;
   }
 }
