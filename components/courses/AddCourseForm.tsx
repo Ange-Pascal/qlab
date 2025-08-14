@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PlusCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import api from "@/utils/api"; // ton instance Axios avec CSRF token
 import router from "next/router";
 
-export default function AddCourseForm() {
+export default function AddCourseForm({onCourseCreated}: {onCourseCreated: (id: number) => void}) {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -21,6 +21,15 @@ export default function AddCourseForm() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  // Charger l'id si deja en brouillon
+
+  useEffect(() =>{
+    const saveId = localStorage.getItem("draftCourseId"); 
+    if (saveId) {
+      onCourseCreated(Number(saveId));
+    }
+  }, [onCourseCreated])
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -59,7 +68,10 @@ export default function AddCourseForm() {
         },
       });
 
-      setSuccess("Cours ajouté avec succès !");
+      const createdId = res.data.id;
+      setSuccess("Cours ajouté avec succès !"); 
+      localStorage.setItem("draftCourseId", createdId.toString()); 
+      onCourseCreated(createdId);
       setFormData({
         title: "",
         description: "",
@@ -75,14 +87,18 @@ export default function AddCourseForm() {
       console.error("Erreur complète :", err);
       console.log("Réponse API :", err?.response?.data);
       setError(err?.response?.data?.error || "Une erreur s'est produite.");
-    }
+    } 
+
+
+
+
   };
 
   return (
     <div className="max-w-3xl mx-auto p-6 rounded-xl shadow space-y-6">
       <div className="flex items-center space-x-3">
         <PlusCircle className="text-violet-600 w-7 h-7" />
-        <h2 className="text-2xl font-bold">Ajouter un cours</h2>
+        <h2 className="text-2xl font-bold">Add a course</h2>
       </div>
 
       {success && <p className="text-green-600 font-semibold">{success}</p>}
