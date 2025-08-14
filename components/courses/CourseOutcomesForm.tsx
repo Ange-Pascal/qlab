@@ -2,7 +2,7 @@
 
 import { useCourseOutcomes } from "./useCourseOutcomes";
 
-export default function CourseOutcomesForm({ slug }: { slug: string }) {
+export default function CourseOutcomesForm({ courseId }: {courseId: number}) {
   const {
     outcomes,
     loading,
@@ -11,7 +11,7 @@ export default function CourseOutcomesForm({ slug }: { slug: string }) {
     addOutcome,
     submit,
     maxReached,
-  } = useCourseOutcomes(slug);
+  } = useCourseOutcomes(courseId);
 
   return (
     <div className="max-w-2xl mx-auto p-6 space-y-6 shadow rounded">

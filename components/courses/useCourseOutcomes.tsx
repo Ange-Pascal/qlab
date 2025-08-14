@@ -3,7 +3,7 @@ import api from "@/utils/api";
 
 type Outcome = { title: string; description: string };
 
-export function useCourseOutcomes(slug: string, max = 5) {
+export function useCourseOutcomes(courseId: number, max = 5) {
   const [outcomes, setOutcomes] = useState<Outcome[]>([
     { title: "", description: "" },
   ]);
@@ -27,7 +27,7 @@ export function useCourseOutcomes(slug: string, max = 5) {
 
     try {
       await api.get("/sanctum/csrf-cookie"); // pour Sanctum
-      await api.post(`/api/courses/${slug}/outcomes`, { outcomes });
+      await api.post(`/api/courses/${courseId}/outcomes`, { outcomes });
 
       setMessage("✅ Outcomes ajoutés avec succès !");
       setOutcomes([{ title: "", description: "" }]);

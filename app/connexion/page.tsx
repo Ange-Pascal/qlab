@@ -31,10 +31,8 @@ export default function LoginPage() {
 
       toast.success("Connexion réussie ✅");
 
-      // ⏳ pause 1 sec avant redirection
-      // setTimeout(() => {
+   
         router.push("/courses");
-      // }, 1000);
     } catch (error: any) {
       console.error(
         "Erreur de connexion :",
@@ -107,7 +105,7 @@ export default function LoginPage() {
             type="submit"
             className="w-full  text-white font-semibold py-2 px-4 rounded-md hover:bg-violet-900 transition"
           >
-            Se connecter
+            Login
           </Button>
         </form>
 
