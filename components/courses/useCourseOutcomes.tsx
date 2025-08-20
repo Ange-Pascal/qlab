@@ -27,7 +27,7 @@ export function useCourseOutcomes(courseId: number, max = 5) {
 
     try {
       await api.get("/sanctum/csrf-cookie"); // pour Sanctum
-      await api.post(`/api/courses/${courseId}/outcomes`, { outcomes });
+      await api.post(`/api/instructor/courses/${courseId}/outcomes`, { outcomes });
 
       setMessage("✅ Outcomes ajoutés avec succès !");
       setOutcomes([{ title: "", description: "" }]);

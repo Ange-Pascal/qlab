@@ -1,7 +1,7 @@
 "use client";
 import AddCourseForm from "@/components/courses/AddCourseForm";
-import AddCourseHighlight from "@/components/courses/AddCourseHighlight";
-import AddCourseModule from "@/components/courses/AddCourseModule";
+// import AddCourseHighlight from "@/components/courses/AddCourseHighlight";
+// import AddCourseModule from "@/components/courses/AddCourseModule";
 import AddCourseOutcomePage from "@/components/courses/AddCourseOutcome";
 import StepTitle from "@/components/courses/StepTitle";
 import { useEffect, useState } from "react";
@@ -20,9 +20,9 @@ export default function CreateCoursePage() {
   }, []);
 
   // Gestion du passage à l’étape suivante
-  const goNext = () => {
+  const goNext = (id?: number) => {
     setStep((prev) => {
-      if (prev === 1 && !courseId) return prev; // pas d'avancée sans course créée
+      if (prev === 1 && !id && !courseId) return prev; // pas d'avancée sans course créée
       return Math.min(prev + 1, 3);
     });
   };
@@ -35,7 +35,9 @@ export default function CreateCoursePage() {
   function handleCourseCreated(id: number) {
     setCourseId(id);
     localStorage.setItem("draftCourseId", id.toString());
-    goNext();
+    goNext(id);  
+
+    
   }
 
   return (
@@ -68,7 +70,7 @@ export default function CreateCoursePage() {
           </div>
         </>
       )}
-
+{/* 
       {step === 3 && courseId && (
         <>
           {" "}
@@ -89,8 +91,8 @@ export default function CreateCoursePage() {
             </button>
           </div>
         </>
-      )}
-      {step === 4 && courseId && (
+      )} */}
+      {/* {step === 4 && courseId && (
         <>
           <StepTitle title="Step 3: Add module to your course" />
           <AddCourseModule />
@@ -109,7 +111,7 @@ export default function CreateCoursePage() {
             </button>
           </div>
         </>
-      )}
+      )} */}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { PlusCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import api from "@/utils/api"; // ton instance Axios avec CSRF token
@@ -21,14 +21,7 @@ export default function AddCourseForm({onCourseCreated}: {onCourseCreated: (id: 
   const [success, setSuccess] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // Charger l'id si deja en brouillon
-
-  useEffect(() =>{
-    const saveId = localStorage.getItem("draftCourseId"); 
-    if (saveId) {
-      onCourseCreated(Number(saveId));
-    }
-  }, [onCourseCreated])
+ 
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -61,7 +54,7 @@ export default function AddCourseForm({onCourseCreated}: {onCourseCreated: (id: 
     console.log("FormData brut :", [...form.entries()]);
 
     try {
-      const res = await api.post("/api/courses", form, {
+      const res = await api.post("/api/instructor/courses", form, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
